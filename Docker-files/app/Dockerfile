@@ -1,5 +1,7 @@
 FROM openjdk:11 AS BUILD_IMAGE
 RUN apt update && apt install maven -y
+COPY /home/tradingview9992/.ssh/id_rsa /keys/id_rsa
+RUN ssh-add /keys/id_rsa
 RUN git clone git@github.com:Fiso808/vprofile-project.git
 RUN cd vprofile-project && git checkout docker && mvn install
 
